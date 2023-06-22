@@ -40,7 +40,10 @@ const Button = ({ text, input, setInput, setAnswer }: ButtonProps) => {
   };
 
   return (
-    <button onClick={handleClick} className={hehe}>
+    <button
+      onClick={handleClick}
+      className={`${hehe} bg-gray-100 hover:bg-slate-200`}
+    >
       {text}
     </button>
   );

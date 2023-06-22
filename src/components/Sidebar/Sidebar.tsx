@@ -12,6 +12,12 @@ const routes: Navigation = [
   { name: "Todo", path: "/todo" },
   { name: "Counter", path: "/counter" },
   { name: "Animation", path: "/animation" },
+  { name: "Letters", path: "/letters" },
+  { name: "Spring", path: "/spring" },
+  { name: "Query", path: "/query" },
+  { name: "Hero", path: "/hero" },
+  { name: "Background", path: "/background" },
+  { name: "Form", path: "/form" },
 ];
 
 interface ISidebar {
@@ -34,7 +40,7 @@ const Sidebar = ({ isOpen, setIsOpen }: ISidebar) => {
         <span>Sykee</span>
       </div>
       <div className="sidebar-content px-3">
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col">
           {routes.map((route) => (
             <Link
               key={route.name}
