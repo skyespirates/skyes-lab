@@ -10,10 +10,7 @@ const TodoItem = ({ id, todo, completed }: TodoItemProps) => {
   const { deleteTodo } = useDeleteTodo();
   const { handleToggleTodo } = useToggleCompleted();
   return (
-    <li
-      className="bg-slate-50 w-full flex justify-between items-center p-2 rounded relative hover:shadow-[0_4px_6px_#bbb] hover:-translate-y-[1px] transition-all"
-      onClick={() => handleToggleTodo(id)}
-    >
+    <li className="bg-slate-50 w-full flex justify-between items-center p-2 rounded relative hover:shadow-[0_4px_6px_#bbb] hover:-translate-y-[1px] transition-all">
       <span className={`${completed ? "text-red-600" : ""}`}>{todo}</span>
       <span className="flex gap-2">
         <button

@@ -8,6 +8,7 @@ Skyes lab is my personal way to learn, exercise and experiment new technologies 
 
 1. Reducer Hooks
 2. Context API
+3. Pagination
 
 ### Libraries
 

@@ -6,7 +6,7 @@ const TodoForm = () => {
   const { addTodo } = useAddTodo();
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    if (todoInput.current !== null) {
+    if (todoInput.current !== null && todoInput.current.value.trim() !== "") {
       addTodo(todoInput.current?.value as string);
       todoInput.current.value = "";
     }

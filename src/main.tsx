@@ -23,6 +23,7 @@ import Query from "./components/Query/Query.tsx";
 import Hero from "./components/Hero/Hero.tsx";
 import Background from "./components/Background/Background.tsx";
 import Rehofo from "./components/RHF/RHF.tsx";
+import Pagination from "./components/Pagination/Pagination.tsx";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
       <Route path="hero" element={<Hero />} />
       <Route path="background" element={<Background />} />
       <Route path="form" element={<Rehofo />} />
+      <Route path="pagination" element={<Pagination />} />
     </Route>
   )
 );

@@ -18,6 +18,7 @@ const routes: Navigation = [
   { name: "Hero", path: "/hero" },
   { name: "Background", path: "/background" },
   { name: "Form", path: "/form" },
+  { name: "Pagination", path: "/pagination" },
 ];
 
 interface ISidebar {

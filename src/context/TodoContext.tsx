@@ -15,12 +15,17 @@ type TodoType = {
 
 type StateType = {
   todos: TodoType[];
+  done: TodoType[];
 };
 
 const initState: StateType = {
   todos: [
     { id: "aaaaaaa", text: "Swimming at pool", completed: false },
-    { id: "bbbbb", text: "Running at track", completed: true },
+    { id: "bbbbb", text: "Running at track", completed: false },
+  ],
+  done: [
+    { id: "cccc", text: "Playing basketball", completed: true },
+    { id: "ddddd", text: "Playing football", completed: true },
   ],
 };
 
@@ -46,19 +51,51 @@ const reducer = (state: StateType, action: ReducerAction): StateType => {
         ],
       };
     case REDUCER_ACTION_TYPE.DELETE_TODO:
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.payload),
-      };
+      const merged = state.todos.concat(state.done);
+      const todo = merged.find((td) => td.id === action.payload);
+      if (todo!.completed) {
+        return {
+          ...state,
+          done: state.done.filter((item) => todo?.id !== item.id),
+        };
+      } else {
+        return {
+          ...state,
+          todos: state.todos.filter((item) => todo?.id !== item.id),
+        };
+      }
+
+    // return {
+    //   ...state,
+    //   todos: state.todos.filter((todo) => todo.id !== action.payload),
+    // };
     case REDUCER_ACTION_TYPE.TOGGLE_COMPLETED:
-      return {
-        ...state,
-        todos: state.todos.map((todo) =>
-          todo.id === action.payload
-            ? { ...todo, completed: !todo.completed }
-            : todo
-        ),
-      };
+      const merge = state.todos.concat(state.done);
+
+      const item = merge.find((td) => td.id === action.payload) as TodoType;
+
+      if (item.completed) {
+        return {
+          ...state,
+          todos: [...state.todos, { ...item, completed: false }],
+          done: state.done.filter((td) => td.id !== action.payload),
+        };
+      } else {
+        return {
+          ...state,
+          todos: state.todos.filter((td) => td.id !== action.payload),
+          done: [{ ...item, completed: true }, ...state.done],
+        };
+      }
+
+    // return {
+    //   ...state,
+    //   todos: state.todos.map(function (todo) {
+    //     return todo.id === action.payload
+    //       ? { ...todo, completed: !todo.completed }
+    //       : todo;
+    //   }),
+    // };
     default:
       throw new Error();
   }
@@ -122,13 +159,13 @@ export const useDeleteTodo = (): UseDeleteTodoHookType => {
   return { deleteTodo };
 };
 
-type UseTodoItems = { todos: TodoType[] };
+type UseTodoItems = { todos: TodoType[]; done: TodoType[] };
 
 export const useTodoItems = (): UseTodoItems => {
   const {
-    state: { todos },
+    state: { todos, done },
   } = useContext(TodoContext);
-  return { todos };
+  return { todos, done };
 };
 
 type UseToggleCompleted = {

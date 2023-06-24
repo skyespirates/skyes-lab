@@ -5,7 +5,7 @@ import TodoItem from "../TodoItem/TodoItem";
 import { useTodoItems } from "../../context/TodoContext";
 
 const TodoList = () => {
-  const { todos } = useTodoItems();
+  const { todos, done } = useTodoItems();
   return (
     <motion.div
       initial={{ opacity: 0, y: "-100%" }}
@@ -16,6 +16,17 @@ const TodoList = () => {
       <TodoForm />
       <ul className="flex flex-col gap-2">
         {todos.map((td) => (
+          <TodoItem
+            key={td.id}
+            id={td.id}
+            todo={td.text}
+            completed={td.completed}
+          />
+        ))}
+      </ul>
+      <div className="h-1 bg-slate-400"></div>
+      <ul className="flex flex-col gap-2">
+        {done.map((td) => (
           <TodoItem
             key={td.id}
             id={td.id}
