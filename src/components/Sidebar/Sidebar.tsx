@@ -19,6 +19,7 @@ const routes: Navigation = [
   { name: "Background", path: "/background" },
   { name: "Form", path: "/form" },
   { name: "Pagination", path: "/pagination" },
+  { name: "Toolkit", path: "/toolkit" },
 ];
 
 interface ISidebar {
@@ -29,7 +30,7 @@ interface ISidebar {
 const Sidebar = ({ isOpen, setIsOpen }: ISidebar) => {
   return (
     <div
-      className={`sidebar flex flex-col gap-y-4 fixed opacity-100 transition-all z-10 bg-white top-0 left-0  h-full w-72 shadow-[0_5px_10px_rgba(0,0,0,0.1)] ${
+      className={`sidebar flex flex-col gap-y-4 fixed opacity-100 transition-all z-10 bg-white top-0 left-0  h-full overflow-y-auto w-72 shadow-[0_5px_10px_rgba(0,0,0,0.1)] ${
         isOpen ? "translate-x-[0px]" : "translate-x-[-288px]"
       }`}
     >

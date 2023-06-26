@@ -25,3 +25,4 @@ Skyes lab is my personal way to learn, exercise and experiment new technologies 
 11. React Wrap Balancer (balancing text for different view port)
 12. Zod {schema declaration and validation}
 13. React Hook Form {straightforward form handling}
+14. Redux Toolkit (react state management library)
