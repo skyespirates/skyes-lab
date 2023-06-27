@@ -12,8 +12,6 @@ import {
 import App from "./App.tsx";
 import { TodoProvider } from "./context/TodoContext.tsx";
 
-import { configureStore } from "@reduxjs/toolkit";
-
 // Pages
 import Calculator from "./components/Calculator/Calculator.tsx";
 import Counter from "./components/Counter/Counter.tsx";
@@ -27,11 +25,12 @@ import Background from "./components/Background/Background.tsx";
 import Rehofo from "./components/RHF/RHF.tsx";
 import Pagination from "./components/Pagination/Pagination.tsx";
 import Toolkit from "./components/Toolkit/Toolkit.tsx";
+import Todos from "./components/Todos/Todos.tsx";
 
 // Provider
 import { Provider } from "react-redux";
-// Reducer
-import counterReducer from "./slices/counterSlice.ts";
+// Store
+import store from "./store.ts";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -41,11 +40,6 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
     },
   },
-});
-
-// Create Store
-const store = configureStore({
-  reducer: counterReducer,
 });
 
 const router = createBrowserRouter(
@@ -63,6 +57,7 @@ const router = createBrowserRouter(
       <Route path="form" element={<Rehofo />} />
       <Route path="pagination" element={<Pagination />} />
       <Route path="toolkit" element={<Toolkit />} />
+      <Route path="todos" element={<Todos />} />
     </Route>
   )
 );

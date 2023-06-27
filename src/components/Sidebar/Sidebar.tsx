@@ -20,6 +20,7 @@ const routes: Navigation = [
   { name: "Form", path: "/form" },
   { name: "Pagination", path: "/pagination" },
   { name: "Toolkit", path: "/toolkit" },
+  { name: "Todos", path: "/todos" },
 ];
 
 interface ISidebar {
