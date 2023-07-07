@@ -1,14 +1,14 @@
-import { useCallback, useMemo } from "react";
-import type { Engine } from "tsparticles-engine";
-import Particles from "react-particles";
-import { loadSlim } from "tsparticles-slim";
+import { useCallback, useMemo } from 'react'
+import type { Engine } from 'tsparticles-engine'
+import Particles from 'react-particles'
+import { loadSlim } from 'tsparticles-slim'
 // import { loadFull } from "tsparticles";
 
 const Particle = () => {
   const options = useMemo(() => {
     return {
       background: {
-        color: "#121212",
+        color: '#121212',
       },
       fullScreen: {
         enable: true, // enabling this will make the canvas fill the entire screen, it's enabled by default
@@ -18,11 +18,11 @@ const Particle = () => {
         events: {
           onClick: {
             enable: true, // enables the click event
-            mode: "push", // adds the particles on click
+            mode: 'push', // adds the particles on click
           },
           onHover: {
             enable: true, // enables the hover event
-            mode: "repulse", // make the particles run away from the cursor
+            mode: 'repulse', // make the particles run away from the cursor
           },
         },
         modes: {
@@ -54,14 +54,20 @@ const Particle = () => {
           value: 80, // PROPERTIES
         },
       },
-    };
-  }, []);
+    }
+  }, [])
   const particlesInit = useCallback(async (engine: Engine) => {
-    await loadSlim(engine);
+    await loadSlim(engine)
     // await loadFull(engine);
-  }, []);
+  }, [])
 
-  return <Particles id="background" init={particlesInit} options={options} />;
-};
+  return (
+    <Particles
+      id='background'
+      init={particlesInit}
+      options={options}
+    />
+  )
+}
 
-export default Particle;
+export default Particle

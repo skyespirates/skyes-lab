@@ -1,33 +1,27 @@
-import {
-  createContext,
-  useContext,
-  useReducer,
-  useCallback,
-  ReactElement,
-} from "react";
-import { nanoid } from "nanoid";
+import { createContext, useContext, useReducer, useCallback, ReactElement } from 'react'
+import { nanoid } from 'nanoid'
 
 type TodoType = {
-  id: string;
-  text: string;
-  completed: boolean;
-};
+  id: string
+  text: string
+  completed: boolean
+}
 
 type StateType = {
-  todos: TodoType[];
-  done: TodoType[];
-};
+  todos: TodoType[]
+  done: TodoType[]
+}
 
 const initState: StateType = {
   todos: [
-    { id: "aaaaaaa", text: "Swimming at pool", completed: false },
-    { id: "bbbbb", text: "Running at track", completed: false },
+    { id: 'aaaaaaa', text: 'Swimming at pool', completed: false },
+    { id: 'bbbbb', text: 'Running at track', completed: false },
   ],
   done: [
-    { id: "cccc", text: "Playing basketball", completed: true },
-    { id: "ddddd", text: "Playing football", completed: true },
+    { id: 'cccc', text: 'Playing basketball', completed: true },
+    { id: 'ddddd', text: 'Playing football', completed: true },
   ],
-};
+}
 
 const enum REDUCER_ACTION_TYPE {
   ADD_TODO,
@@ -36,33 +30,30 @@ const enum REDUCER_ACTION_TYPE {
 }
 
 type ReducerAction = {
-  type: REDUCER_ACTION_TYPE;
-  payload?: string;
-};
+  type: REDUCER_ACTION_TYPE
+  payload?: string
+}
 
 const reducer = (state: StateType, action: ReducerAction): StateType => {
   switch (action.type) {
     case REDUCER_ACTION_TYPE.ADD_TODO:
       return {
         ...state,
-        todos: [
-          ...state.todos,
-          { id: nanoid(10), text: action.payload!, completed: false },
-        ],
-      };
+        todos: [...state.todos, { id: nanoid(10), text: action.payload!, completed: false }],
+      }
     case REDUCER_ACTION_TYPE.DELETE_TODO:
-      const merged = state.todos.concat(state.done);
-      const todo = merged.find((td) => td.id === action.payload);
+      const merged = state.todos.concat(state.done)
+      const todo = merged.find((td) => td.id === action.payload)
       if (todo!.completed) {
         return {
           ...state,
           done: state.done.filter((item) => todo?.id !== item.id),
-        };
+        }
       } else {
         return {
           ...state,
           todos: state.todos.filter((item) => todo?.id !== item.id),
-        };
+        }
       }
 
     // return {
@@ -70,22 +61,22 @@ const reducer = (state: StateType, action: ReducerAction): StateType => {
     //   todos: state.todos.filter((todo) => todo.id !== action.payload),
     // };
     case REDUCER_ACTION_TYPE.TOGGLE_COMPLETED:
-      const merge = state.todos.concat(state.done);
+      const merge = state.todos.concat(state.done)
 
-      const item = merge.find((td) => td.id === action.payload) as TodoType;
+      const item = merge.find((td) => td.id === action.payload) as TodoType
 
       if (item.completed) {
         return {
           ...state,
           todos: [...state.todos, { ...item, completed: false }],
           done: state.done.filter((td) => td.id !== action.payload),
-        };
+        }
       } else {
         return {
           ...state,
           todos: state.todos.filter((td) => td.id !== action.payload),
           done: [{ ...item, completed: true }, ...state.done],
-        };
+        }
       }
 
     // return {
@@ -97,82 +88,78 @@ const reducer = (state: StateType, action: ReducerAction): StateType => {
     //   }),
     // };
     default:
-      throw new Error();
+      throw new Error()
   }
-};
+}
 
 const useTodoContext = (initState: StateType) => {
-  const [state, dispatch] = useReducer(reducer, initState);
+  const [state, dispatch] = useReducer(reducer, initState)
 
   const addTodo = useCallback((text: string) => {
-    dispatch({ type: REDUCER_ACTION_TYPE.ADD_TODO, payload: text });
-  }, []);
+    dispatch({ type: REDUCER_ACTION_TYPE.ADD_TODO, payload: text })
+  }, [])
   const deleteTodo = useCallback((id: string) => {
-    dispatch({ type: REDUCER_ACTION_TYPE.DELETE_TODO, payload: id });
-  }, []);
+    dispatch({ type: REDUCER_ACTION_TYPE.DELETE_TODO, payload: id })
+  }, [])
   const handleToggleTodo = useCallback((id: string) => {
-    dispatch({ type: REDUCER_ACTION_TYPE.TOGGLE_COMPLETED, payload: id });
-  }, []);
+    dispatch({ type: REDUCER_ACTION_TYPE.TOGGLE_COMPLETED, payload: id })
+  }, [])
 
-  return { state, addTodo, deleteTodo, handleToggleTodo };
-};
+  return { state, addTodo, deleteTodo, handleToggleTodo }
+}
 
-type UseTodoContextType = ReturnType<typeof useTodoContext>;
+type UseTodoContextType = ReturnType<typeof useTodoContext>
 
 const initContextState: UseTodoContextType = {
   state: initState,
   addTodo: () => {},
   deleteTodo: () => {},
   handleToggleTodo: () => {},
-};
+}
 
-export const TodoContext = createContext<UseTodoContextType>(initContextState);
+export const TodoContext = createContext<UseTodoContextType>(initContextState)
 
 type ChildrenType = {
-  children?: ReactElement | ReactElement[] | undefined;
-};
+  children?: ReactElement | ReactElement[] | undefined
+}
 
 export const TodoProvider = ({ children }: ChildrenType): ReactElement => {
-  return (
-    <TodoContext.Provider value={useTodoContext(initState)}>
-      {children}
-    </TodoContext.Provider>
-  );
-};
+  return <TodoContext.Provider value={useTodoContext(initState)}>{children}</TodoContext.Provider>
+}
 
 // Custom Hook
 type UseAddTodoHookType = {
-  addTodo: (text: string) => void;
-};
+  addTodo: (text: string) => void
+}
 
 export const useAddTodo = (): UseAddTodoHookType => {
-  const { addTodo } = useContext(TodoContext);
-  return { addTodo };
-};
+  const { addTodo } = useContext(TodoContext)
+  return { addTodo }
+}
 
 type UseDeleteTodoHookType = {
-  deleteTodo: (id: string) => void;
-};
+  deleteTodo: (id: string) => void
+}
 
 export const useDeleteTodo = (): UseDeleteTodoHookType => {
-  const { deleteTodo } = useContext(TodoContext);
-  return { deleteTodo };
-};
+  const { deleteTodo } = useContext(TodoContext)
+  return { deleteTodo }
+}
 
-type UseTodoItems = { todos: TodoType[]; done: TodoType[] };
+type UseTodoItems = { todos: TodoType[]; done: TodoType[] }
 
 export const useTodoItems = (): UseTodoItems => {
   const {
     state: { todos, done },
-  } = useContext(TodoContext);
-  return { todos, done };
-};
+  } = useContext(TodoContext)
+  return { todos, done }
+}
 
 type UseToggleCompleted = {
-  handleToggleTodo: (id: string) => void;
-};
+  handleToggleTodo: (id: string) => void
+}
 
 export const useToggleCompleted = (): UseToggleCompleted => {
-  const { handleToggleTodo } = useContext(TodoContext);
-  return { handleToggleTodo };
-};
+  const { handleToggleTodo } = useContext(TodoContext)
+  return { handleToggleTodo }
+}

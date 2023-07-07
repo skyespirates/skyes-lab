@@ -26,3 +26,4 @@ Skyes lab is my personal way to learn, exercise and experiment new technologies 
 12. Zod {schema declaration and validation}
 13. React Hook Form {straightforward form handling}
 14. Redux Toolkit (react state management library)
+15. Shadcn/ui (component library)

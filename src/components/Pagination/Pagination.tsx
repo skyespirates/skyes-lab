@@ -1,20 +1,20 @@
-import { useState, useMemo } from "react";
-import Page from "./Page";
-import data from "./data.json";
+import { useState, useMemo } from 'react'
+import Page from './Page'
+import data from './data.json'
 
-let PageSize = 10;
+let PageSize = 10
 
 const Pagination = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1)
 
   const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
-    return data.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage]);
+    const firstPageIndex = (currentPage - 1) * PageSize
+    const lastPageIndex = firstPageIndex + PageSize
+    return data.slice(firstPageIndex, lastPageIndex)
+  }, [currentPage])
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className='flex flex-col items-center gap-2'>
       <table>
         <thead>
           <tr>
@@ -35,7 +35,7 @@ const Pagination = () => {
                 <td>{item.email}</td>
                 <td>{item.phone}</td>
               </tr>
-            );
+            )
           })}
         </tbody>
       </table>
@@ -46,6 +46,6 @@ const Pagination = () => {
         onPageChange={(page) => setCurrentPage(page as number)}
       />
     </div>
-  );
-};
-export default Pagination;
+  )
+}
+export default Pagination

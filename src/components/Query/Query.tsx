@@ -1,31 +1,30 @@
-import { useRef, useState } from "react";
-import { useGetTodo } from "../../hooks/useTodos";
+import { useGetTodo } from '../../hooks/useTodos'
+import { Link } from 'react-router-dom'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Button } from '../ui/button'
 
 const Query = () => {
-  const [id, setId] = useState(1);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { data, isLoading, error } = useGetTodo(id);
+  const { data, isLoading, error } = useGetTodo()
 
-  const handleClick = () => {
-    if (inputRef.current) {
-      setId(parseInt(inputRef.current?.value));
-    }
-  };
-
+  if (isLoading) return <p>Loading...</p>
+  if (error) return <p>An error occured: {(error as any).message}</p>
   return (
-    <div className="h-screen bg-slate-200 flex justify-center items-center">
-      <div className="">
-        {error instanceof Error && (
-          <div>
-            <p>
-              {error.message}
-              <br />
-              There is no todo item with id: {id}
-            </p>
-          </div>
-        )}
-        <p>{isLoading ? "Loading..." : JSON.stringify(data)}</p>
-        <p>Current Id: {id}</p>
+    <div className='h-screen bg-slate-200 flex justify-center items-center'>
+      <div className='grid grid-cols-4 gap-2 px-24'>
+        {(data as any).map((d: any) => (
+          <Card key={d.id}>
+            <CardHeader>
+              <CardTitle className='text-base capitalize'>{d.title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Link to={`/query/${d.id}`}>
+                <Button>Details</Button>
+              </Link>
+            </CardContent>
+          </Card>
+        ))}
+
+        {/*}
         <div className="flex">
           <input
             ref={inputRef}
@@ -40,12 +39,13 @@ const Query = () => {
             Search
           </button>
         </div>
+        {*/}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Query;
+export default Query
 
 // REACT -> process.env.REACT_SOMETHING
 // VITE -> import.meta.env.VITE_SOMETHING

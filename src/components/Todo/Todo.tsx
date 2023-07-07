@@ -1,20 +1,20 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion'
 
-import TodoForm from "../TodoForm/TodoForm";
-import TodoItem from "../TodoItem/TodoItem";
-import { useTodoItems } from "../../context/TodoContext";
+import TodoForm from '../TodoForm/TodoForm'
+import TodoItem from '../TodoItem/TodoItem'
+import { useTodoItems } from '../../context/TodoContext'
 
 const TodoList = () => {
-  const { todos, done } = useTodoItems();
+  const { todos, done } = useTodoItems()
   return (
     <motion.div
-      initial={{ opacity: 0, y: "-100%" }}
+      initial={{ opacity: 0, y: '-100%' }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: "easeIn" }}
-      className="flex flex-col gap-4 w-96 mx-auto mt-8 bg-gray-200 p-8 shadow-[0_8px_12px_#ddd]"
+      transition={{ duration: 0.4, ease: 'easeIn' }}
+      className='flex flex-col gap-4 w-96 mx-auto mt-8 bg-gray-200 p-8 shadow-[0_8px_12px_#ddd]'
     >
       <TodoForm />
-      <ul className="flex flex-col gap-2">
+      <ul className='flex flex-col gap-2'>
         {todos.map((td) => (
           <TodoItem
             key={td.id}
@@ -24,8 +24,8 @@ const TodoList = () => {
           />
         ))}
       </ul>
-      <div className="h-1 bg-slate-400"></div>
-      <ul className="flex flex-col gap-2">
+      <div className='h-1 bg-slate-400'></div>
+      <ul className='flex flex-col gap-2'>
         {done.map((td) => (
           <TodoItem
             key={td.id}
@@ -36,7 +36,7 @@ const TodoList = () => {
         ))}
       </ul>
     </motion.div>
-  );
-};
+  )
+}
 
-export default TodoList;
+export default TodoList

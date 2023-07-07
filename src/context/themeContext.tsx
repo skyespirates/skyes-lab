@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer } from 'react'
 
 // stateType
 // actionType
@@ -28,40 +28,36 @@ import { createContext, useReducer } from "react";
 */
 
 type StateType = {
-  theme: "light" | "dark";
-};
+  theme: 'light' | 'dark'
+}
 
 type ActionType = {
-  type: "THEME";
-};
+  type: 'THEME'
+}
 
 const initialState: StateType = {
-  theme: "light",
-};
+  theme: 'light',
+}
 
-type Reducer<S, A> = (state: S, action: A) => S;
+type Reducer<S, A> = (state: S, action: A) => S
 
 const reducer: Reducer<StateType, ActionType> = (state, action) => {
   switch (action.type) {
-    case "THEME":
-      return { ...state, theme: state.theme === "light" ? "dark" : "light" };
+    case 'THEME':
+      return { ...state, theme: state.theme === 'light' ? 'dark' : 'light' }
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const ThemeContext = createContext<{
-  state: StateType;
-  dispatch: React.Dispatch<ActionType>;
-}>({ state: initialState, dispatch: () => {} });
+  state: StateType
+  dispatch: React.Dispatch<ActionType>
+}>({ state: initialState, dispatch: () => {} })
 type ChildrenType = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 export const ThemeProvider = ({ children }: ChildrenType) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  return (
-    <ThemeContext.Provider value={{ state, dispatch }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
+  const [state, dispatch] = useReducer(reducer, initialState)
+  return <ThemeContext.Provider value={{ state, dispatch }}>{children}</ThemeContext.Provider>
+}

@@ -1,19 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { useQuery } from '@tanstack/react-query'
+import axios from 'axios'
 
 interface Data {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
+  userId: number
+  id: number
+  title: string
+  completed: boolean
 }
 
-export const useGetTodo = (id: number) =>
+export const useGetTodo = () =>
   useQuery({
-    queryKey: ["mytodo", id],
+    queryKey: ['mytodo'],
     queryFn: async () => {
-      const { data } = await axios.get(import.meta.env.VITE_API_URL + "/" + id);
-      return data as Data;
+      const { data } = await axios.get(import.meta.env.VITE_API_URL + '?_limit=10')
+      return data as Data
     },
     retry: 1,
-  });
+  })

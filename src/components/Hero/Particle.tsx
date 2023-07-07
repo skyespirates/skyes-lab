@@ -1,10 +1,10 @@
-import { useCallback } from "react";
-import type { Engine } from "tsparticles-engine";
-import Particles from "react-particles";
-import { loadFull } from "tsparticles";
+import { useCallback } from 'react'
+import type { Engine } from 'tsparticles-engine'
+import Particles from 'react-particles'
+import { loadFull } from 'tsparticles'
 type ParticleProps = {
-  className: string;
-};
+  className: string
+}
 const Particle = ({ className }: ParticleProps) => {
   const particlesInit = useCallback(async (engine: Engine) => {
     // console.log(engine);
@@ -12,8 +12,8 @@ const Particle = ({ className }: ParticleProps) => {
     // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
     // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
     // starting from v2 you can add only the features you need reducing the bundle size
-    await loadFull(engine);
-  }, []);
+    await loadFull(engine)
+  }, [])
 
   //   const particlesLoaded = useCallback(
   //     async (container: Container | undefined) => {
@@ -23,14 +23,14 @@ const Particle = ({ className }: ParticleProps) => {
   //   );
   return (
     <Particles
-      id="tsparticles"
+      id='tsparticles'
       className={className}
       init={particlesInit}
       //   loaded={particlesLoaded}
       options={{
         background: {
           color: {
-            value: "#121212",
+            value: '#121212',
           },
         },
         fullScreen: {
@@ -42,11 +42,11 @@ const Particle = ({ className }: ParticleProps) => {
           events: {
             onClick: {
               enable: true,
-              mode: "push",
+              mode: 'push',
             },
             onHover: {
               enable: false,
-              mode: "repulse",
+              mode: 'repulse',
             },
             resize: true,
           },
@@ -62,10 +62,10 @@ const Particle = ({ className }: ParticleProps) => {
         },
         particles: {
           color: {
-            value: "#ffffff",
+            value: '#ffffff',
           },
           links: {
-            color: "#ffffff",
+            color: '#ffffff',
             distance: 150,
             enable: true,
             opacity: 0.5,
@@ -75,10 +75,10 @@ const Particle = ({ className }: ParticleProps) => {
             enable: true,
           },
           move: {
-            direction: "none",
+            direction: 'none',
             enable: true,
             outModes: {
-              default: "bounce",
+              default: 'bounce',
             },
             random: false,
             speed: 2,
@@ -95,7 +95,7 @@ const Particle = ({ className }: ParticleProps) => {
             value: 0.5,
           },
           shape: {
-            type: "circle",
+            type: 'circle',
           },
           size: {
             value: { min: 1, max: 5 },
@@ -104,7 +104,7 @@ const Particle = ({ className }: ParticleProps) => {
         detectRetina: true,
       }}
     />
-  );
-};
+  )
+}
 
-export default Particle;
+export default Particle
