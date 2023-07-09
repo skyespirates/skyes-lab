@@ -29,12 +29,12 @@ const Rehofo = () => {
   const onSubmit: SubmitHandler<ValidationSchema> = (data) => console.log(data)
 
   return (
-    <div className='min-h-screen  flex flex-col justify-start items-center'>
-      <div className=' border rounded mt-4 px-6 py-10 flex flex-col gap-6'>
+    <div className='flex flex-col items-center justify-start min-h-screen'>
+      <div className='flex flex-col gap-6 px-6 py-10 mt-4 border rounded '>
         <h1 className='text-2xl font-semibold text-center text-gray-700'>Registration Form</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='w-80 flex flex-col gap-3'
+          className='flex flex-col gap-3 w-80'
         >
           <div className='flex flex-col gap-1'>
             <label
@@ -46,12 +46,12 @@ const Rehofo = () => {
             <input
               id='username'
               placeholder='Username'
-              className='px-2 py-1 border border-red-500 focus:outline-blue-500 rounded'
+              className='px-2 py-1 border rounded focus:outline-blue-500'
               type='text'
               {...register('username')}
             />
             {errors.username && (
-              <p className='text-red-500 text-xs mt-1'>{errors.username.message}</p>
+              <p className='mt-1 text-xs text-red-500'>{errors.username.message}</p>
             )}
           </div>
           <div className='flex flex-col gap-1'>
@@ -64,11 +64,11 @@ const Rehofo = () => {
             <input
               id='email'
               placeholder='Email'
-              className='px-2 py-1 border  focus:outline-blue-500 rounded'
+              className='px-2 py-1 border rounded focus:outline-blue-500'
               type='email'
               {...register('email')}
             />
-            {errors.email && <p className='text-red-500 text-xs mt-1'>{errors.email.message}</p>}
+            {errors.email && <p className='mt-1 text-xs text-red-500'>{errors.email.message}</p>}
           </div>
           <div className='flex flex-col gap-1'>
             <label
@@ -80,12 +80,12 @@ const Rehofo = () => {
             <input
               id='password'
               placeholder='Password'
-              className='px-2 py-1 border  focus:outline-blue-500 rounded'
+              className='px-2 py-1 border rounded focus:outline-blue-500'
               type='password'
               {...register('password')}
             />
             {errors.password && (
-              <p className='text-red-500 text-xs mt-1'>{errors.password.message}</p>
+              <p className='mt-1 text-xs text-red-500'>{errors.password.message}</p>
             )}
           </div>
           <div className='flex flex-col gap-1'>
@@ -98,18 +98,18 @@ const Rehofo = () => {
             <input
               id='confirmPasword'
               placeholder='Confirm Pasword'
-              className='px-2 py-1 border  focus:outline-blue-500 rounded'
+              className='px-2 py-1 border rounded focus:outline-blue-500'
               type='password'
               {...register('confirmPassword')}
             />
             {errors.confirmPassword && (
-              <p className='text-red-500 text-xs mt-1'>{errors.confirmPassword.message}</p>
+              <p className='mt-1 text-xs text-red-500'>{errors.confirmPassword.message}</p>
             )}
           </div>
           <input
             type='submit'
             value='Register'
-            className='bg-blue-500 py-1 rounded text-white cursor-pointer hover:bg-blue-600 mt-4'
+            className='py-1 mt-4 text-white bg-blue-500 rounded cursor-pointer hover:bg-blue-600'
           />
         </form>
       </div>

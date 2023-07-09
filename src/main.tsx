@@ -32,6 +32,7 @@ const Toolkit = React.lazy(() => import('@components/Toolkit/Toolkit.tsx'))
 const Todos = React.lazy(() => import('@components/Todos/Todos.tsx'))
 const AsyncThunk = React.lazy(() => import('@components/AsyncThunk/AsyncThunk.tsx'))
 const LazyLoad = React.lazy(() => import('@components/LazyLoad/LazyLoad.tsx'))
+const Validation = React.lazy(() => import('@components/Validation'))
 
 // Provider
 import { Provider } from 'react-redux'
@@ -66,6 +67,14 @@ const router = createBrowserRouter(
         element={
           <React.Suspense fallback='Loading...'>
             <TodoList />
+          </React.Suspense>
+        }
+      />
+      <Route
+        path='validation'
+        element={
+          <React.Suspense fallback='Loading...'>
+            <Validation />
           </React.Suspense>
         }
       />
@@ -208,7 +217,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <ThemeProvider>
           <QueryClientProvider client={queryClient}>
             <RouterProvider router={router} />
-            <ReactQueryDevtools initialIsOpen />
+            <ReactQueryDevtools initialIsOpen={false} />
           </QueryClientProvider>
         </ThemeProvider>
       </TodoProvider>

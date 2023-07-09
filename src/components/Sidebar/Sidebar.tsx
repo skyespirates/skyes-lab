@@ -10,6 +10,7 @@ type Navigation = {
 const routes: Navigation = [
   { name: 'Home', path: '/' },
   { name: 'Todo', path: '/todo' },
+  { name: 'Validation', path: '/validation' },
   { name: 'AsyncThunk', path: '/asyncThunk' },
   { name: 'LazyLoad', path: '/lazyLoad' },
   { name: 'Infinite', path: '/infinite' },
